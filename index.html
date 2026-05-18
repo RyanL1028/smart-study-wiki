@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Study Wiki by Ryan</title>
+<style>
+:root {
+  --bg: #f8fafc; --surface: #fff; --border: #e2e8f0; --text: #0f172a; --muted: #64748b;
+  --accent: #3b82f6; --accent-light: #eff6ff; --sidebar-w: 280px;
+  --radius: 10px; --radius-sm: 6px; --shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+body.dark {
+  --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --text: #e1e3ea;
+  --muted: #8b8fa3; --accent: #6c8aff; --accent-light: #1e2440;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar { width: var(--sidebar-w); background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 10; }
+.sidebar-header { padding: 16px 18px; border-bottom: 1px solid var(--border); }
+.sidebar-header h1 { font-size: 1rem; font-weight: 700; color: var(--text); }
+.sidebar-header .subtitle { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+.sidebar-search { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.sidebar-search input { width: 100%; padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 20px; font-size: 0.82rem; background: var(--bg); color: var(--text); outline: none; }
+.sidebar-search input:focus { border-color: var(--accent); }
+.sidebar-nav { flex: 1; overflow-y: auto; padding: 8px 0; }
+.sidebar-footer { padding: 10px 18px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: var(--muted); }
+.sidebar-footer a { color: var(--accent); text-decoration: none; }
+.theme-toggle { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 10px; font-size: 0.7rem; cursor: pointer; color: var(--muted); }
+
+/* Tree */
+.tree-item { cursor: pointer; user-select: none; }
+.tree-row { display: flex; align-items: center; padding: 5px 18px; font-size: 0.82rem; color: var(--text); transition: background 0.1s; gap: 4px; }
+.tree-row:hover { background: var(--accent-light); }
+.tree-row.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+.tree-arrow { width: 16px; font-size: 0.6rem; color: var(--muted); flex-shrink: 0; text-align: center; transition: transform 0.15s; }
+.tree-arrow.open { transform: rotate(90deg); }
+.tree-icon { font-size: 0.75rem; flex-shrink: 0; width: 16px; text-align: center; }
+.tree-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tree-children { display: none; }
+.tree-children.open { display: block; }
+.tree-children .tree-row { padding-left: 32px; }
+.tree-children .tree-children .tree-row { padding-left: 46px; }
+
+/* Main content */
+.main { margin-left: var(--sidebar-w); flex: 1; padding: 32px 40px; max-width: 900px; }
+.main-empty { text-align: center; padding: 80px 20px; color: var(--muted); }
+.main-empty h2 { font-size: 1.2rem; margin-bottom: 8px; color: var(--text); }
+.main-empty p { font-size: 0.9rem; }
+
+/* Wiki content styling */
+.wiki-content h1 { font-size: 1.8rem; margin-bottom: 4px; color: var(--text); }
+.wiki-content h2 { font-size: 1.3rem; margin: 28px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); color: var(--text); }
+.wiki-content h3 { font-size: 1.05rem; margin: 20px 0 8px; color: var(--text); }
+.wiki-content p { line-height: 1.65; margin-bottom: 10px; }
+.wiki-content strong { color: var(--text); }
+.wiki-content a { color: var(--accent); text-decoration: none; }
+.wiki-content a:hover { text-decoration: underline; }
+.wiki-content ul, .wiki-content ol { margin: 8px 0 14px; padding-left: 22px; }
+.wiki-content li { line-height: 1.6; margin-bottom: 3px; }
+.wiki-content hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+.wiki-content code { background: var(--accent-light); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+.wiki-content pre { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 18px; overflow-x: auto; margin: 12px 0; font-size: 0.85rem; }
+.wiki-meta { color: var(--muted); font-size: 0.8rem; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.wiki-meta span { margin-right: 14px; }
+.wikilink { color: var(--accent); cursor: pointer; font-weight: 500; }
+.wikilink:hover { text-decoration: underline; }
+.wikilink.broken { color: #ef4444; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sidebar { width: 100%; position: relative; max-height: 40vh; }
+  .main { margin-left: 0; padding: 20px; }
+  body { flex-direction: column; }
+}
+
+/* Dark overrides */
+body.dark .wiki-content h1, body.dark .wiki-content h2, body.dark .wiki-content h3 { color: var(--text); }
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h1>Smart Study Wiki</h1>
+    <div class="subtitle">by Ryan</div>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="search" placeholder="Search wiki..." oninput="filterTree()">
+  </div>
+  <nav class="sidebar-nav" id="tree-nav"></nav>
+  <div class="sidebar-footer">
+    <a href="https://ryanl1028.github.io/smart-study/">Study App</a>
+    <button class="theme-toggle" onclick="toggleTheme()">Light/Dark</button>
+  </div>
+</aside>
+<main class="main" id="main-content">
+  <div class="main-empty">
+    <h2>Smart Study Wiki</h2>
+    <p>Select a page from the sidebar to start reading.</p>
+    <p style="margin-top:12px;font-size:0.82rem">276 pages across Concepts, Papers, Projects, Evals, and more.</p>
+  </div>
+</main>
+
+<script>
+// State
+let treeData = null;
+let currentPath = null;
+
+// Theme
+(function() {
+  const saved = localStorage.getItem('llmwiki_wiki_theme');
+  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.body.classList.add('dark');
+  }
+})();
+
+function toggleTheme() {
+  document.body.classList.toggle('dark');
+  localStorage.setItem('llmwiki_wiki_theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+}
+
+// Load tree
+async function init() {
+  const res = await fetch('tree.json');
+  treeData = await res.json();
+  renderTree(treeData.children, document.getElementById('tree-nav'));
+
+  // Handle hash navigation
+  if (window.location.hash && window.location.hash.startsWith('#wiki/')) {
+    const path = decodeURIComponent(window.location.hash.slice(1));
+    loadPage(path);
+  }
+}
+
+function renderTree(children, container, level) {
+  level = level || 0;
+  children.forEach(node => {
+    const div = document.createElement('div');
+    div.className = 'tree-item';
+    div.dataset.path = node.path;
+    div.dataset.name = node.name.toLowerCase();
+
+    const row = document.createElement('div');
+    row.className = 'tree-row';
+    row.style.paddingLeft = (18 + level * 14) + 'px';
+
+    if (node.type === 'dir') {
+      row.innerHTML = '<span class="tree-arrow">▶</span><span class="tree-icon">📁</span><span class="tree-name">' + esc(node.name) + '</span>';
+      row.onclick = function(e) {
+        e.stopPropagation();
+        const arrow = this.querySelector('.tree-arrow');
+        const childContainer = this.parentNode.querySelector('.tree-children');
+        arrow.classList.toggle('open');
+        if (childContainer) childContainer.classList.toggle('open');
+      };
+    } else {
+      row.innerHTML = '<span style="width:16px;flex-shrink:0"></span><span class="tree-icon">📄</span><span class="tree-name">' + esc(node.name) + '</span>';
+      row.onclick = function(e) {
+        e.stopPropagation();
+        loadPage(node.path);
+        document.querySelectorAll('.tree-row.active').forEach(r => r.classList.remove('active'));
+        this.classList.add('active');
+      };
+    }
+
+    div.appendChild(row);
+    container.appendChild(div);
+
+    if (node.children) {
+      const childDiv = document.createElement('div');
+      childDiv.className = 'tree-children';
+      renderTree(node.children, childDiv, level + 1);
+      div.appendChild(childDiv);
+    }
+  });
+}
+
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// Search
+function filterTree() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  document.querySelectorAll('.tree-item').forEach(item => {
+    if (!q) { item.style.display = ''; return; }
+    const name = item.dataset.name || '';
+    const path = item.dataset.path || '';
+    if (name.includes(q) || path.toLowerCase().includes(q)) {
+      item.style.display = '';
+      // Expand parents
+      let p = item.parentNode;
+      while (p) {
+        if (p.classList.contains('tree-children')) { p.classList.add('open'); const arrow = p.parentNode.querySelector('.tree-arrow'); if (arrow) arrow.classList.add('open'); }
+        p = p.parentNode;
+      }
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+// Load and render page
+async function loadPage(path) {
+  currentPath = path;
+  window.location.hash = '#wiki/' + encodeURIComponent(path);
+  const main = document.getElementById('main-content');
+  main.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted)">Loading...</div>';
+
+  try {
+    const res = await fetch('wiki/' + path);
+    if (!res.ok) throw new Error('Not found');
+    const md = await res.text();
+    const html = renderMarkdown(md);
+    main.innerHTML = '<div class="wiki-content">' + html + '</div>';
+  } catch (e) {
+    main.innerHTML = '<div class="main-empty"><h2>Page not found</h2><p>' + esc(path) + '</p></div>';
+  }
+}
+
+// Markdown renderer
+function renderMarkdown(md) {
+  let lines = md.split('\n');
+  let html = '';
+  let inList = false, listType = '';
+
+  function closeList() {
+    if (inList) { html += '</' + listType + '>'; inList = false; listType = ''; }
+  }
+
+  // Extract metadata (first few lines with **Key**: Value)
+  let metaHtml = '';
+  let contentStart = 0;
+  let metaLines = [];
+  for (let i = 0; i < lines.length; i++) {
+    let m = lines[i].match(/^\*\*(Summary|Tags|Created|Last Updated)\*\*:\s*(.+)/);
+    if (m) {
+      metaLines.push('<span><strong>' + m[1] + '</strong>: ' + esc(m[2]) + '</span>');
+      contentStart = i + 1;
+    } else if (lines[i].trim() === '---' && i < 5) {
+      contentStart = i + 1;
+      break;
+    } else if (lines[i].trim() && !lines[i].startsWith('**') && i > 3) {
+      break;
+    }
+  }
+  if (metaLines.length) {
+    metaHtml = '<div class="wiki-meta">' + metaLines.join('') + '</div>';
+  }
+
+  for (let i = contentStart; i < lines.length; i++) {
+    let line = lines[i];
+    let trimmed = line.trim();
+
+    // Blank line
+    if (!trimmed) { closeList(); continue; }
+
+    // Horizontal rule
+    if (trimmed === '---') { closeList(); html += '<hr>'; continue; }
+
+    // Headers
+    if (trimmed.startsWith('# ')) { closeList(); html += '<h1>' + renderInline(trimmed.slice(2)) + '</h1>'; continue; }
+    if (trimmed.startsWith('## ')) { closeList(); html += '<h2>' + renderInline(trimmed.slice(3)) + '</h2>'; continue; }
+    if (trimmed.startsWith('### ')) { closeList(); html += '<h3>' + renderInline(trimmed.slice(4)) + '</h3>'; continue; }
+    if (trimmed.startsWith('#### ')) { closeList(); html += '<h4>' + renderInline(trimmed.slice(5)) + '</h4>'; continue; }
+
+    // Unordered list
+    if (trimmed.match(/^[-*]\s+/)) {
+      if (!inList || listType !== 'ul') { closeList(); html += '<ul>'; inList = true; listType = 'ul'; }
+      html += '<li>' + renderInline(trimmed.replace(/^[-*]\s+/, '')) + '</li>';
+      continue;
+    }
+
+    // Ordered list
+    let olMatch = trimmed.match(/^(\d+)\.\s+/);
+    if (olMatch) {
+      if (!inList || listType !== 'ol') { closeList(); html += '<ol>'; inList = true; listType = 'ol'; }
+      html += '<li>' + renderInline(trimmed.replace(/^\d+\.\s+/, '')) + '</li>';
+      continue;
+    }
+
+    // Indented continuation of list item
+    if (trimmed.startsWith('  ') && inList) {
+      html += ' ' + renderInline(trimmed.trim());
+      continue;
+    }
+
+    // Code blocks
+    if (trimmed.startsWith('```')) { closeList(); html += '<pre>'; i++;
+      while (i < lines.length && !lines[i].trim().startsWith('```')) {
+        html += esc(lines[i]) + '\n'; i++;
+      }
+      html += '</pre>'; continue;
+    }
+
+    // Inline code (standalone lines)
+    if (trimmed.startsWith('`') && trimmed.endsWith('`') && trimmed.length > 2) {
+      closeList(); html += '<p><code>' + esc(trimmed.slice(1, -1)) + '</code></p>'; continue;
+    }
+
+    // Regular paragraph
+    closeList();
+    html += '<p>' + renderInline(trimmed) + '</p>';
+  }
+  closeList();
+  return metaHtml + html;
+}
+
+function renderInline(text) {
+  // Escape HTML
+  let out = esc(text);
+  // Bold
+  out = out.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Italic
+  out = out.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  // Inline code
+  out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // Wikilinks [[Page]] and [[Page|Display]]
+  out = out.replace(/\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]/g, function(m, page, display) {
+    var pname = page.trim();
+    var dname = display ? display.trim() : pname;
+    var resolved = resolveWikilink(pname);
+    if (resolved) {
+      return '<a href="#wiki/' + encodeURIComponent(resolved) + '" class="wikilink" onclick="event.preventDefault();loadPage(\'' + escAttr(resolved) + '\')">' + esc(dname) + '</a>';
+    } else {
+      return '<span class="wikilink broken" title="Page not found: ' + esc(pname) + '">' + esc(dname) + '</span>';
+    }
+  });
+  return out;
+}
+
+function escAttr(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+
+// Resolve wikilink to file path
+function resolveWikilink(name) {
+  if (!treeData) return null;
+  // Search for matching file
+  function search(children, target) {
+    for (let node of children) {
+      let nodeName = node.name.replace(/\.md$/, '');
+      if (nodeName.toLowerCase() === target.toLowerCase()) return node.path;
+      if (node.name.toLowerCase() === target.toLowerCase() + '.md') return node.path;
+      if (node.children) {
+        let found = search(node.children, target);
+        if (found) return found;
+      }
+    }
+    return null;
+  }
+  return search(treeData.children, name);
+}
+
+// Init
+init();
+</script>
+</body>
+</html>
