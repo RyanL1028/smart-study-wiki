@@ -1,0 +1,259 @@
+{
+  "totalPages": 276,
+  "latest": [
+    {
+      "path": "Concepts/Data Compression.md",
+      "title": "Data Compression",
+      "summary": "The process of reducing the size of a file by encoding data more efficiently. Can be lossless (no data lost) or lossy (some data permanently removed).",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "data-representation"
+      ]
+    },
+    {
+      "path": "Concepts/Post-Condition Loop.md",
+      "title": "Post-Condition Loop",
+      "summary": "A loop that executes the body at least once before checking the condition. Example: REPEAT ... UNTIL condition.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "programming"
+      ]
+    },
+    {
+      "path": "Concepts/Decomposition.md",
+      "title": "Decomposition",
+      "summary": "Breaking down a complex problem into smaller, more manageable sub-problems that are easier to understand and solve individually.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "algorithms"
+      ]
+    },
+    {
+      "path": "Concepts/SUM Function.md",
+      "title": "SUM Function",
+      "summary": "An SQL aggregate function that calculates the total of numeric values in a column. Example: SELECT SUM(Price) FROM Orders.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "databases"
+      ]
+    },
+    {
+      "path": "Concepts/Simplex Transmission.md",
+      "title": "Simplex Transmission",
+      "summary": "One-way data transmission where data travels in only one direction, e.g., from a sensor to a computer or radio broadcasting.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "data-transmission"
+      ]
+    },
+    {
+      "path": "Concepts/HTTP.md",
+      "title": "HTTP",
+      "summary": "Hypertext Transfer Protocol \u2014 the protocol used for transferring web pages and resources between a web server and a browser. Operates as a request-response protocol.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "internet"
+      ]
+    },
+    {
+      "path": "Concepts/Logic Expression.md",
+      "title": "Logic Expression",
+      "summary": "A mathematical notation using Boolean operators (AND, OR, NOT) and variables to describe the behaviour of a logic circuit. Example: (A AND B) OR (NOT C).",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "boolean-logic"
+      ]
+    },
+    {
+      "path": "Concepts/Boolean Logic.md",
+      "title": "Boolean Logic",
+      "summary": "A form of algebra where all values are either TRUE (1) or FALSE (0). Used in computer circuits, programming conditions, and search queries.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "boolean-logic"
+      ]
+    },
+    {
+      "path": "Concepts/Denary.md",
+      "title": "Denary",
+      "summary": "The base-10 number system used by humans in everyday counting, also known as the decimal system.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "data-representation"
+      ]
+    },
+    {
+      "path": "Concepts/OR Gate.md",
+      "title": "OR Gate",
+      "summary": "A logic gate with two inputs that outputs 1 when at least one input is 1. Outputs 0 only when both inputs are 0. Symbol: curved arrow-like shape.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "boolean-logic"
+      ]
+    },
+    {
+      "path": "Concepts/Optical Storage.md",
+      "title": "Optical Storage",
+      "summary": "Storage media using lasers to read and write data on reflective surfaces, e.g., CD, DVD, Blu-ray. Used for media distribution and archival storage.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "hardware"
+      ]
+    },
+    {
+      "path": "Concepts/Program Counter.md",
+      "title": "Program Counter",
+      "summary": "A register that holds the memory address of the next instruction to be fetched. It increments after each fetch.",
+      "created": "2026-05-08T14:03:00Z",
+      "updated": "2026-05-08T14:03:00Z",
+      "tags": [
+        "concepts",
+        "computer-science",
+        "igcse-computer-science",
+        "hardware"
+      ]
+    }
+  ],
+  "featured": [
+    {
+      "path": "00-Home.md",
+      "title": "LLM Wiki Home",
+      "summary": "",
+      "created": "",
+      "updated": "",
+      "tags": []
+    },
+    {
+      "path": "07-Concepts.md",
+      "title": "Concepts Index",
+      "summary": "",
+      "created": "",
+      "updated": "",
+      "tags": []
+    },
+    {
+      "path": "CS-Index.md",
+      "title": "Computer Science Index",
+      "summary": "Complete index of all IGCSE Computer Science concepts, papers, and sources in the wiki.",
+      "created": "2026-05-08T00:00:00Z",
+      "updated": "2026-05-08T00:00:00Z",
+      "tags": [
+        "index",
+        "computer-science",
+        "igcse-computer-science"
+      ]
+    },
+    {
+      "path": "Chem-Index.md",
+      "title": "Chemistry Index",
+      "summary": "Complete index of all chemistry-related concepts, papers, and sources in the wiki.",
+      "created": "2026-05-05T00:00:00Z",
+      "updated": "2026-05-05T00:00:00Z",
+      "tags": [
+        "index",
+        "chemistry",
+        "hub"
+      ]
+    },
+    {
+      "path": "01-Models.md",
+      "title": "Models Index",
+      "summary": "",
+      "created": "",
+      "updated": "",
+      "tags": []
+    },
+    {
+      "path": "03-Papers.md",
+      "title": "Papers Index",
+      "summary": "",
+      "created": "",
+      "updated": "",
+      "tags": []
+    },
+    {
+      "path": "06-Projects.md",
+      "title": "Projects Index",
+      "summary": "",
+      "created": "",
+      "updated": "",
+      "tags": []
+    }
+  ],
+  "subjects": [
+    {
+      "name": "Computer Science",
+      "icon": "\ud83d\udcbb",
+      "link": "wiki/CS-Index.md",
+      "count": 160
+    },
+    {
+      "name": "Chemistry",
+      "icon": "\u2697\ufe0f",
+      "link": "wiki/Chem-Index.md",
+      "count": 38
+    },
+    {
+      "name": "Physics",
+      "icon": "\u26a1",
+      "link": "wiki/Concepts/Forces Fundamentals Hub.md",
+      "count": 23
+    },
+    {
+      "name": "MUN & Humanities",
+      "icon": "\ud83c\udf10",
+      "link": "wiki/Concepts/Humanitarian Aid.md",
+      "count": 0
+    },
+    {
+      "name": "AI & Models",
+      "icon": "\ud83e\udd16",
+      "link": "wiki/01-Models.md",
+      "count": 1
+    }
+  ]
+}
