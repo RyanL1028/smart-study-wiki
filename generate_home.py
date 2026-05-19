@@ -71,7 +71,7 @@ subjects = [
     {'name': 'Computer Science', 'icon': '💻', 'link': 'wiki/CS-Index.md', 'count': sum(1 for p in all_pages if 'computer-science' in (p.get('tags') or []))},
     {'name': 'Chemistry', 'icon': '⚗️', 'link': 'wiki/Chem-Index.md', 'count': sum(1 for p in all_pages if 'chemistry' in (p.get('tags') or []))},
     {'name': 'Physics', 'icon': '⚡', 'link': 'wiki/Concepts/Forces Fundamentals Hub.md', 'count': sum(1 for p in all_pages if 'physics' in (p.get('tags') or []))},
-    {'name': 'MUN & Humanities', 'icon': '🌐', 'link': 'wiki/Concepts/Humanitarian Aid.md', 'count': sum(1 for p in all_pages if 'mun' in (p.get('tags') or []))},
+    {'name': 'MUN & Humanities', 'icon': '🌐', 'link': 'wiki/Concepts/Humanitarian Aid.md', 'count': sum(1 for p in all_pages if any(t in (p.get('tags') or []) for t in ['mun', 'humanitarian', 'international', 'aid', 'conflict', 'diplomacy', 'ngo', 'refugees', 'un', 'law', 'rights', 'negotiation']))},
     {'name': 'AI & Models', 'icon': '🤖', 'link': 'wiki/01-Models.md', 'count': sum(1 for p in all_pages if 'ai' in (p.get('tags') or []) or 'models' in (p.get('tags') or []))},
 ]
 

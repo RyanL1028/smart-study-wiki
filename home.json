@@ -1,160 +1,148 @@
 {
-  "totalPages": 276,
+  "totalPages": 393,
   "latest": [
     {
-      "path": "Concepts/Data Compression.md",
-      "title": "Data Compression",
-      "summary": "The process of reducing the size of a file by encoding data more efficiently. Can be lossless (no data lost) or lossy (some data permanently removed).",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/Glossary.md",
+      "title": "Glossary",
+      "summary": "",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "data-representation"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/Post-Condition Loop.md",
-      "title": "Post-Condition Loop",
-      "summary": "A loop that executes the body at least once before checking the condition. Example: REPEAT ... UNTIL condition.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/Which revision strategy?.md",
+      "title": "Which revision strategy?",
+      "summary": "Work through the revision strategies on the next few pages. Choose strategies you can use for each topic and add them to the fourth column of your table.",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "programming"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/Decomposition.md",
-      "title": "Decomposition",
-      "summary": "Breaking down a complex problem into smaller, more manageable sub-problems that are easier to understand and solve individually.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/List of Illustrations.md",
+      "title": "List of Illustrations",
+      "summary": "",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "algorithms"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/SUM Function.md",
-      "title": "SUM Function",
-      "summary": "An SQL aggregate function that calculates the total of numeric values in a column. Example: SELECT SUM(Price) FROM Orders.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/How much revision?.md",
+      "title": "How much revision?",
+      "summary": "In the third column of your table, colour in each cell \u2013 red for topics you find the most difficult, amber for topics you need to spend more time on, and green for topics you feel confident about....",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "databases"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/Simplex Transmission.md",
-      "title": "Simplex Transmission",
-      "summary": "One-way data transmission where data travels in only one direction, e.g., from a sensor to a computer or radio broadcasting.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/Revision tips.md",
+      "title": "Revision tips",
+      "summary": "Congratulations on reaching the end of Oxford International Science for Year 7. You are on your way to becoming a true scientist Now it is time to revise what you have learned \u2013 but how can you do...",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "data-transmission"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/HTTP.md",
-      "title": "HTTP",
-      "summary": "Hypertext Transfer Protocol \u2014 the protocol used for transferring web pages and resources between a web server and a browser. Operates as a request-response protocol.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/Plan, monitor, evaluate.md",
+      "title": "Plan, monitor, evaluate",
+      "summary": "Expert learners approach new and unfamiliar tasks in a structured way. Often they will start by studying the question or task, thinking carefully about what subject knowledge they are going to need...",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "internet"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/Logic Expression.md",
-      "title": "Logic Expression",
-      "summary": "A mathematical notation using Boolean operators (AND, OR, NOT) and variables to describe the behaviour of a logic circuit. Example: (A AND B) OR (NOT C).",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/Being a scientist.md",
+      "title": "Being a scientist",
+      "summary": "Often science lessons at secondary school are very different from what you may be used to in primary school. Secondary students need to work more independently \u2013 this could be doing an experiment in...",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "boolean-logic"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/Boolean Logic.md",
-      "title": "Boolean Logic",
-      "summary": "A form of algebra where all values are either TRUE (1) or FALSE (0). Used in computer circuits, programming conditions, and search queries.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/Title Page.md",
+      "title": "Title Page",
+      "summary": "",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "boolean-logic"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/Denary.md",
-      "title": "Denary",
-      "summary": "The base-10 number system used by humans in everyday counting, also known as the decimal system.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/Acknowledgements.md",
+      "title": "Acknowledgements",
+      "summary": "The publisher and authors would like to thank the following for permission to use photographs and other copyright material:",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "data-representation"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/OR Gate.md",
-      "title": "OR Gate",
-      "summary": "A logic gate with two inputs that outputs 1 when at least one input is 1. Outputs 0 only when both inputs are 0. Symbol: curved arrow-like shape.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/How confident do I feel after revising?.md",
+      "title": "How confident do I feel after revising?",
+      "summary": "If a particular strategy worked well for you, plan to use it again. If it did not work well, try a different method. You might want to find another study buddy who uses the strategy you prefer. You...",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "boolean-logic"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/Optical Storage.md",
-      "title": "Optical Storage",
-      "summary": "Storage media using lasers to read and write data on reflective surfaces, e.g., CD, DVD, Blu-ray. Used for media distribution and archival storage.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/How confident do I feel before revising?.md",
+      "title": "How confident do I feel before revising?",
+      "summary": "",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "hardware"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     },
     {
-      "path": "Concepts/Program Counter.md",
-      "title": "Program Counter",
-      "summary": "A register that holds the memory address of the next instruction to be fetched. It increments after each fetch.",
-      "created": "2026-05-08T14:03:00Z",
-      "updated": "2026-05-08T14:03:00Z",
+      "path": "Science Student Book 7/List of Tables.md",
+      "title": "List of Tables",
+      "summary": "",
+      "created": "2026-05-19",
+      "updated": "2026-05-19",
       "tags": [
-        "concepts",
-        "computer-science",
-        "igcse-computer-science",
-        "hardware"
+        "science",
+        "oxford-science",
+        "student-book-7"
       ]
     }
   ],
@@ -235,19 +223,19 @@
       "name": "Chemistry",
       "icon": "\u2697\ufe0f",
       "link": "wiki/Chem-Index.md",
-      "count": 38
+      "count": 69
     },
     {
       "name": "Physics",
       "icon": "\u26a1",
       "link": "wiki/Concepts/Forces Fundamentals Hub.md",
-      "count": 23
+      "count": 53
     },
     {
       "name": "MUN & Humanities",
       "icon": "\ud83c\udf10",
       "link": "wiki/Concepts/Humanitarian Aid.md",
-      "count": 0
+      "count": 43
     },
     {
       "name": "AI & Models",
