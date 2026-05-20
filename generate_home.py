@@ -60,18 +60,20 @@ all_pages.sort(key=lambda p: p['created'], reverse=True)
 latest = [p for p in all_pages if p['created']][:12]
 
 # Featured: pick notable index pages and top-level pages
-featured_paths = {'CS-Index.md', 'Chem-Index.md', '00-Home.md', '01-Models.md', '07-Concepts.md', '03-Papers.md', '06-Projects.md'}
+featured_paths = {'CS-Index.md', 'Chem-Index.md', 'Bio-Index.md', 'Phys-Index.md', 'MUN-Index.md', 'Sci-Index.md', '00-Home.md', '01-Models.md', '07-Concepts.md', '03-Papers.md', '06-Projects.md'}
 featured = [p for p in all_pages if p['path'] in featured_paths]
 # Sort featured in a sensible order
-featured_order = ['00-Home.md', '07-Concepts.md', 'CS-Index.md', 'Chem-Index.md', '01-Models.md', '03-Papers.md', '06-Projects.md']
+featured_order = ['00-Home.md', '07-Concepts.md', 'CS-Index.md', 'Chem-Index.md', 'Bio-Index.md', 'Phys-Index.md', 'MUN-Index.md', 'Sci-Index.md', '01-Models.md', '03-Papers.md', '06-Projects.md']
 featured.sort(key=lambda p: featured_order.index(p['path']) if p['path'] in featured_order else 99)
 
 # Browse by subject
 subjects = [
     {'name': 'Computer Science', 'icon': '💻', 'link': 'wiki/CS-Index.md', 'count': sum(1 for p in all_pages if 'computer-science' in (p.get('tags') or []))},
+    {'name': 'Biology', 'icon': '🧬', 'link': 'wiki/Bio-Index.md', 'count': sum(1 for p in all_pages if 'biology' in (p.get('tags') or []))},
     {'name': 'Chemistry', 'icon': '⚗️', 'link': 'wiki/Chem-Index.md', 'count': sum(1 for p in all_pages if 'chemistry' in (p.get('tags') or []))},
-    {'name': 'Physics', 'icon': '⚡', 'link': 'wiki/Concepts/Forces Fundamentals Hub.md', 'count': sum(1 for p in all_pages if 'physics' in (p.get('tags') or []))},
-    {'name': 'MUN & Humanities', 'icon': '🌐', 'link': 'wiki/Concepts/Humanitarian Aid.md', 'count': sum(1 for p in all_pages if any(t in (p.get('tags') or []) for t in ['mun', 'humanitarian', 'international', 'aid', 'conflict', 'diplomacy', 'ngo', 'refugees', 'un', 'law', 'rights', 'negotiation']))},
+    {'name': 'Physics', 'icon': '⚡', 'link': 'wiki/Phys-Index.md', 'count': sum(1 for p in all_pages if 'physics' in (p.get('tags') or []))},
+    {'name': 'Basic Science', 'icon': '🔬', 'link': 'wiki/Sci-Index.md', 'count': sum(1 for p in all_pages if 'oxford-science' in (p.get('tags') or []))},
+    {'name': 'MUN & Humanities', 'icon': '🌐', 'link': 'wiki/MUN-Index.md', 'count': sum(1 for p in all_pages if any(t in (p.get('tags') or []) for t in ['mun', 'humanitarian', 'international', 'aid', 'conflict', 'diplomacy', 'ngo', 'refugees', 'un', 'law', 'rights', 'negotiation']))},
     {'name': 'AI & Models', 'icon': '🤖', 'link': 'wiki/01-Models.md', 'count': sum(1 for p in all_pages if 'ai' in (p.get('tags') or []) or 'models' in (p.get('tags') or []))},
 ]
 

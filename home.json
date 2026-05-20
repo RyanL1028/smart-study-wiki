@@ -1,6 +1,57 @@
 {
-  "totalPages": 393,
+  "totalPages": 397,
   "latest": [
+    {
+      "path": "Phys-Index.md",
+      "title": "Physics Index",
+      "summary": "Complete index of physics concepts and Oxford Science Book 7 physics chapters.",
+      "created": "2026-05-19T00:00:00Z",
+      "updated": "2026-05-19T00:00:00Z",
+      "tags": [
+        "index",
+        "physics",
+        "hub"
+      ]
+    },
+    {
+      "path": "MUN-Index.md",
+      "title": "MUN & Humanities Index",
+      "summary": "Complete index of Model United Nations, humanitarian aid, international relations, and law concepts.",
+      "created": "2026-05-19T00:00:00Z",
+      "updated": "2026-05-19T00:00:00Z",
+      "tags": [
+        "index",
+        "mun",
+        "humanities",
+        "humanitarian",
+        "international"
+      ]
+    },
+    {
+      "path": "Bio-Index.md",
+      "title": "Biology Index",
+      "summary": "Complete index of biology concepts, Oxford Science Book 7 biology chapters, and related resources.",
+      "created": "2026-05-19T00:00:00Z",
+      "updated": "2026-05-19T00:00:00Z",
+      "tags": [
+        "index",
+        "biology",
+        "hub"
+      ]
+    },
+    {
+      "path": "Sci-Index.md",
+      "title": "Basic Science Index",
+      "summary": "Complete chapter-by-chapter index of the Oxford International Lower Secondary Science Book 7 \u2014 covering Working Scientifically, Biology, Chemistry, and Physics.",
+      "created": "2026-05-19T00:00:00Z",
+      "updated": "2026-05-19T00:00:00Z",
+      "tags": [
+        "index",
+        "science",
+        "oxford-science",
+        "student-book-7"
+      ]
+    },
     {
       "path": "Science Student Book 7/Glossary.md",
       "title": "Glossary",
@@ -96,54 +147,6 @@
         "oxford-science",
         "student-book-7"
       ]
-    },
-    {
-      "path": "Science Student Book 7/Acknowledgements.md",
-      "title": "Acknowledgements",
-      "summary": "The publisher and authors would like to thank the following for permission to use photographs and other copyright material:",
-      "created": "2026-05-19",
-      "updated": "2026-05-19",
-      "tags": [
-        "science",
-        "oxford-science",
-        "student-book-7"
-      ]
-    },
-    {
-      "path": "Science Student Book 7/How confident do I feel after revising?.md",
-      "title": "How confident do I feel after revising?",
-      "summary": "If a particular strategy worked well for you, plan to use it again. If it did not work well, try a different method. You might want to find another study buddy who uses the strategy you prefer. You...",
-      "created": "2026-05-19",
-      "updated": "2026-05-19",
-      "tags": [
-        "science",
-        "oxford-science",
-        "student-book-7"
-      ]
-    },
-    {
-      "path": "Science Student Book 7/How confident do I feel before revising?.md",
-      "title": "How confident do I feel before revising?",
-      "summary": "",
-      "created": "2026-05-19",
-      "updated": "2026-05-19",
-      "tags": [
-        "science",
-        "oxford-science",
-        "student-book-7"
-      ]
-    },
-    {
-      "path": "Science Student Book 7/List of Tables.md",
-      "title": "List of Tables",
-      "summary": "",
-      "created": "2026-05-19",
-      "updated": "2026-05-19",
-      "tags": [
-        "science",
-        "oxford-science",
-        "student-book-7"
-      ]
     }
   ],
   "featured": [
@@ -188,6 +191,57 @@
       ]
     },
     {
+      "path": "Bio-Index.md",
+      "title": "Biology Index",
+      "summary": "Complete index of biology concepts, Oxford Science Book 7 biology chapters, and related resources.",
+      "created": "2026-05-19T00:00:00Z",
+      "updated": "2026-05-19T00:00:00Z",
+      "tags": [
+        "index",
+        "biology",
+        "hub"
+      ]
+    },
+    {
+      "path": "Phys-Index.md",
+      "title": "Physics Index",
+      "summary": "Complete index of physics concepts and Oxford Science Book 7 physics chapters.",
+      "created": "2026-05-19T00:00:00Z",
+      "updated": "2026-05-19T00:00:00Z",
+      "tags": [
+        "index",
+        "physics",
+        "hub"
+      ]
+    },
+    {
+      "path": "MUN-Index.md",
+      "title": "MUN & Humanities Index",
+      "summary": "Complete index of Model United Nations, humanitarian aid, international relations, and law concepts.",
+      "created": "2026-05-19T00:00:00Z",
+      "updated": "2026-05-19T00:00:00Z",
+      "tags": [
+        "index",
+        "mun",
+        "humanities",
+        "humanitarian",
+        "international"
+      ]
+    },
+    {
+      "path": "Sci-Index.md",
+      "title": "Basic Science Index",
+      "summary": "Complete chapter-by-chapter index of the Oxford International Lower Secondary Science Book 7 \u2014 covering Working Scientifically, Biology, Chemistry, and Physics.",
+      "created": "2026-05-19T00:00:00Z",
+      "updated": "2026-05-19T00:00:00Z",
+      "tags": [
+        "index",
+        "science",
+        "oxford-science",
+        "student-book-7"
+      ]
+    },
+    {
       "path": "01-Models.md",
       "title": "Models Index",
       "summary": "",
@@ -220,6 +274,12 @@
       "count": 160
     },
     {
+      "name": "Biology",
+      "icon": "\ud83e\uddec",
+      "link": "wiki/Bio-Index.md",
+      "count": 35
+    },
+    {
       "name": "Chemistry",
       "icon": "\u2697\ufe0f",
       "link": "wiki/Chem-Index.md",
@@ -228,14 +288,20 @@
     {
       "name": "Physics",
       "icon": "\u26a1",
-      "link": "wiki/Concepts/Forces Fundamentals Hub.md",
-      "count": 53
+      "link": "wiki/Phys-Index.md",
+      "count": 54
+    },
+    {
+      "name": "Basic Science",
+      "icon": "\ud83d\udd2c",
+      "link": "wiki/Sci-Index.md",
+      "count": 118
     },
     {
       "name": "MUN & Humanities",
       "icon": "\ud83c\udf10",
-      "link": "wiki/Concepts/Humanitarian Aid.md",
-      "count": 43
+      "link": "wiki/MUN-Index.md",
+      "count": 44
     },
     {
       "name": "AI & Models",

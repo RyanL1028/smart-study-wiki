@@ -30,6 +30,17 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
 .chrome-search-wrap input { width: 100%; padding: 8px 14px 8px 36px; border: 1px solid var(--border); border-radius: 2px; font-size: 0.85rem; background: var(--bg); color: var(--text); outline: none; font-family: var(--font-sans); }
 .chrome-search-wrap input:focus { border-color: var(--link); box-shadow: inset 0 0 0 1px var(--link); }
 .chrome-search-wrap .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.9rem; pointer-events: none; }
+.search-dropdown { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 4px 4px; max-height: 420px; overflow-y: auto; z-index: 30; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.search-dropdown.open { display: block; }
+.search-result { display: block; padding: 10px 14px; border-bottom: 1px solid var(--border); cursor: pointer; text-decoration: none; color: var(--text); }
+.search-result:hover, .search-result.active { background: var(--hover); }
+.search-result:last-child { border-bottom: none; }
+.search-result .sr-title { font-size: 0.9rem; font-weight: 600; }
+.search-result .sr-title em { color: var(--link); font-style: normal; }
+.search-result .sr-meta { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+.search-result .sr-tags { font-size: 0.68rem; color: var(--muted); margin-top: 2px; }
+.search-result .sr-tags span { background: var(--hover); padding: 1px 5px; border-radius: 3px; margin-right: 3px; }
+.search-empty { padding: 16px; text-align: center; color: var(--muted); font-size: 0.85rem; }
 .chrome-theme { background: none; border: 1px solid var(--border); border-radius: 2px; padding: 5px 10px; font-size: 0.75rem; cursor: pointer; color: var(--muted); font-family: var(--font-sans); white-space: nowrap; }
 .chrome-link { color: var(--link); text-decoration: none; font-size: 0.8rem; white-space: nowrap; }
 .chrome-link:hover { text-decoration: underline; }
@@ -159,7 +170,8 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
   </a>
   <div class="chrome-search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" id="search" placeholder="Search" oninput="filterTree()">
+    <input type="text" id="search" placeholder="Search 393 pages..." oninput="searchPages()" onfocus="searchPages()" onkeydown="searchKey(event)" autocomplete="off">
+    <div class="search-dropdown" id="search-dropdown"></div>
   </div>
   <a href="https://ryanl1028.github.io/smart-study/" class="chrome-link" target="_blank">Study App</a>
   <button class="chrome-theme" onclick="toggleTheme()">Light/Dark</button>
@@ -182,12 +194,14 @@ body { font-family: var(--font-sans); background: var(--bg); color: var(--text);
     <div class="empty-logo">📚</div>
     <h2>Smart Study Wiki</h2>
     <p>The free knowledge base for IGCSE Computer Science, Chemistry, Physics, and MUN.</p>
-    <p style="font-size:0.82rem;color:var(--muted)">276 pages — Select an article from the sidebar (☰) or search above.</p>
+    <p style="font-size:0.82rem;color:var(--muted)">393 pages — Select an article from the sidebar (☰) or search above.</p>
     <div class="empty-links">
       <a href="#wiki/CS-Index.md">Computer Science</a>
       <a href="#wiki/Chem-Index.md">Chemistry</a>
-      <a href="#wiki/00-Home.md">Home</a>
-      <a href="#wiki/Concepts">All Concepts</a>
+      <a href="#wiki/Bio-Index.md">Biology</a>
+      <a href="#wiki/Phys-Index.md">Physics</a>
+      <a href="#wiki/MUN-Index.md">MUN</a>
+      <a href="#wiki/Sci-Index.md">Basic Science</a>
     </div>
   </div>
 </main>
@@ -299,16 +313,24 @@ async function goHome() {
       '<div class="empty-links">' +
       '<a href="#wiki/CS-Index.md">Computer Science</a> ' +
       '<a href="#wiki/Chem-Index.md">Chemistry</a> ' +
-      '<a href="#wiki/00-Home.md">Home</a> ' +
-      '<a href="#wiki/Concepts">All Concepts</a>' +
+      '<a href="#wiki/Bio-Index.md">Biology</a> ' +
+      '<a href="#wiki/Phys-Index.md">Physics</a> ' +
+      '<a href="#wiki/MUN-Index.md">MUN</a> ' +
+      '<a href="#wiki/Sci-Index.md">Basic Science</a>' +
       '</div></div>';
   }
 }
 
+let searchData = [];
+
 // Load tree
 async function init() {
-  const res = await fetch('tree.json');
-  treeData = await res.json();
+  const [treeRes, searchRes] = await Promise.all([
+    fetch('tree.json'),
+    fetch('search-index.json')
+  ]);
+  treeData = await treeRes.json();
+  searchData = await searchRes.json();
   renderTree(treeData.children, document.getElementById('tree-nav'));
 
   if (window.location.hash && window.location.hash.startsWith('#wiki/')) {
@@ -365,17 +387,83 @@ function renderTree(children, container, level) {
 
 function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-// Search in sidebar
-function filterTree() {
-  const q = document.getElementById('search').value.toLowerCase().trim();
+// Search pages by title, tags, summary, and path
+let searchIdx = -1;
+
+function highlight(text, q) {
+  if (!q) return esc(text);
+  const words = q.split(/\s+/).filter(w => w.length > 0);
+  let out = esc(text);
+  for (const w of words) {
+    const re = new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    out = out.replace(re, '<em>$1</em>');
+  }
+  return out;
+}
+
+function searchPages() {
+  const q = document.getElementById('search').value.trim();
+  const dd = document.getElementById('search-dropdown');
+  searchIdx = -1;
+
   if (!q) {
+    dd.classList.remove('open');
+    dd.innerHTML = '';
+    // Also clear tree filter
     document.querySelectorAll('.tree-item').forEach(item => item.style.display = '');
     return;
   }
+
+  const ql = q.toLowerCase();
+  const words = ql.split(/\s+/).filter(w => w.length > 0);
+
+  // Score pages: title match > tag match > summary match > path match
+  let results = [];
+  for (const p of searchData) {
+    let score = 0;
+    const title = (p.title || '').toLowerCase();
+    const summary = (p.summary || '').toLowerCase();
+    const tags = (p.tags || []).join(' ').toLowerCase();
+    const path = (p.path || '').toLowerCase();
+
+    for (const w of words) {
+      if (title.includes(w)) score += 100;
+      else if (tags.includes(w)) score += 50;
+      else if (summary.includes(w)) score += 20;
+      else if (path.includes(w)) score += 10;
+    }
+    // Bonus for exact title match
+    if (title === ql) score += 200;
+
+    if (score > 0) {
+      results.push({ ...p, score });
+    }
+  }
+
+  results.sort((a, b) => b.score - a.score);
+  results = results.slice(0, 20);
+
+  if (results.length === 0) {
+    dd.innerHTML = '<div class="search-empty">No pages found matching "' + esc(q) + '"</div>';
+  } else {
+    dd.innerHTML = results.map((r, i) => {
+      return '<a class="search-result' + (i === 0 ? ' active' : '') + '" href="#wiki/' + encodeURIComponent(r.path) + '" data-path="' + escAttr(r.path) + '" data-idx="' + i + '" onclick="event.preventDefault();loadPage(\'' + escAttr(r.path) + '\');document.getElementById(\'search-dropdown\').classList.remove(\'open\');document.getElementById(\'search\').blur()">' +
+        '<div class="sr-title">' + highlight(r.title, q) + '</div>' +
+        (r.summary ? '<div class="sr-meta">' + highlight(r.summary, q) + '</div>' : '') +
+        (r.tags.length ? '<div class="sr-tags">' + r.tags.slice(0, 5).map(t => '<span>' + esc(t) + '</span>').join('') + '</div>' : '') +
+        '</a>';
+    }).join('');
+  }
+  dd.classList.add('open');
+  // Keep tree filtering as secondary
+  filterTreeSidebar(q);
+}
+
+function filterTreeSidebar(ql) {
   document.querySelectorAll('.tree-item').forEach(item => {
     const name = item.dataset.name || '';
     const path = item.dataset.path || '';
-    if (name.includes(q) || path.toLowerCase().includes(q)) {
+    if (!ql || name.includes(ql) || path.toLowerCase().includes(ql)) {
       item.style.display = '';
       let p = item.parentNode;
       while (p) {
@@ -387,6 +475,42 @@ function filterTree() {
     }
   });
 }
+
+function searchKey(e) {
+  const dd = document.getElementById('search-dropdown');
+  const results = dd.querySelectorAll('.search-result');
+  if (!dd.classList.contains('open') || results.length === 0) return;
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    searchIdx = Math.min(searchIdx + 1, results.length - 1);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    searchIdx = Math.max(searchIdx - 1, 0);
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (searchIdx >= 0 && results[searchIdx]) {
+      const path = results[searchIdx].dataset.path;
+      loadPage(path);
+      dd.classList.remove('open');
+      document.getElementById('search').blur();
+    }
+    return;
+  } else if (e.key === 'Escape') {
+    dd.classList.remove('open');
+    document.getElementById('search').blur();
+    return;
+  }
+  results.forEach((r, i) => r.classList.toggle('active', i === searchIdx));
+}
+
+// Close search dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const wrap = document.querySelector('.chrome-search-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    document.getElementById('search-dropdown').classList.remove('open');
+  }
+});
 
 // Load and render page
 async function loadPage(path) {
